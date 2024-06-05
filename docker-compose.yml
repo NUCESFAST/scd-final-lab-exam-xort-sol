@@ -1,0 +1,40 @@
+version: '3'
+services:
+  client:
+    build:
+      context: ./client
+    ports:
+      - "1112:1112"
+    depends_on:
+      - auth
+      - classrooms
+      - event-bus
+      - post
+  auth:
+    build:
+      context: ./Auth
+    ports:
+      - "3112:3112"
+    # Add other configurations if needed
+  classrooms:
+    build:
+      context: ./Classrooms
+    ports:
+      - "3113:3113"
+    # Add other configurations if needed
+  event-bus:
+    build:
+      context: ./event-bus
+    ports:
+      - "3114:3114"
+    # Add other configurations if needed
+  post:
+    build:
+      context: ./Post
+    ports:
+      - "3115:3115"
+    # Add other configurations if needed
+  database:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
